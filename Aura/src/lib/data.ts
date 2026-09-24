@@ -1,5 +1,3 @@
-import { type CSSProperties } from 'react';
-
 /* ============================================================
  * FitMirrors Design Tokens & Data Specs
  * Modern 2026 Liquid Glassmorphism & Generative VTON Types
@@ -24,6 +22,8 @@ export interface Garment {
   url: string;
 }
 
+export type GarmentCategory = 'All' | Garment['category'] | 'Accessories';
+
 export interface ModelPreset {
   id: string;
   name: string;
@@ -36,7 +36,6 @@ export interface SavedFit {
   garmentName: string;
   thumbnail: string;
   timestamp: string;
-  fitScore: number;
 }
 
 export interface FitMetric {
@@ -300,7 +299,6 @@ export const INITIAL_SAVED_FITS: SavedFit[] = [
     garmentName: 'Italian Mulberry Silk Gown',
     thumbnail: U('photo-1581338834647-b0fb40704e21', 300),
     timestamp: '2h ago',
-    fitScore: 98.7,
   },
   {
     id: 'sf2',
@@ -308,6 +306,5 @@ export const INITIAL_SAVED_FITS: SavedFit[] = [
     garmentName: 'Japanese Selvedge Denim Jacket',
     thumbnail: U('photo-1591047139829-d91aecb6caea', 300),
     timestamp: 'Yesterday',
-    fitScore: 99.1,
   },
 ];

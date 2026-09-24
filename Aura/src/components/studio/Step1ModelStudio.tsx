@@ -213,7 +213,7 @@ export function Step1ModelStudio({
               Sample Studio Presets
             </div>
             <p className="mt-1 text-xs text-stone-400">
-              Select one of our verified fashion editorial models to test instant fitting:
+              Select a sample editorial model to test the fitting workflow:
             </p>
 
             <div className="mt-4 flex flex-col gap-2.5">

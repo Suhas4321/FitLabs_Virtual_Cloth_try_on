@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { type LightingPreset, LIGHTING_THEMES } from '@/lib/data';
+import { type LightingPreset } from '@/lib/data';
 
 /* ============================================================
  * ParticleField — a canvas layer of drifting luminous motes

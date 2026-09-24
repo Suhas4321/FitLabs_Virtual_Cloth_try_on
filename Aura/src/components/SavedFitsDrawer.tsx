@@ -68,12 +68,7 @@ export function SavedFitsDrawer({ open, onClose, fits, onRemove }: SavedFitsDraw
                   <div className="min-w-0 flex-1">
                     <div className="truncate text-sm font-semibold text-stone-100">{f.garmentName}</div>
                     <div className="truncate text-xs text-stone-400">{f.modelName}</div>
-                    <div className="mt-1 flex items-center gap-2">
-                      <span className="rounded-full bg-gold-accent/15 border border-gold-accent/30 px-2 py-0.5 text-[10px] font-semibold text-gold-accent">
-                        {f.fitScore}% fit
-                      </span>
-                      <span className="text-[10px] text-stone-400">{f.timestamp}</span>
-                    </div>
+                    <div className="mt-1 text-[10px] text-stone-400">{f.timestamp}</div>
                   </div>
                   <button
                     onClick={() => onRemove(f.id)}

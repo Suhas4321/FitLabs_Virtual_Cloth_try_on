@@ -178,7 +178,7 @@ export function Step4RunwayShowcase({
                 Synthesizing AI Try-On…
               </p>
               <p className="mt-1 text-xs text-stone-400">
-                Rendering 4K photorealistic neural drape
+                Generating a model-dependent garment preview
               </p>
               <div className="mt-6 h-1.5 w-48 overflow-hidden rounded-full bg-stone-800">
                 <div className="h-full rounded-full bg-gradient-to-r from-gold-accent to-amber-400 animate-progress-shimmer" />
@@ -351,7 +351,7 @@ export function Step4RunwayShowcase({
             <div className="flex items-center gap-2 rounded-full border border-stone-800 bg-stone-900/80 px-4 py-1.5 backdrop-blur-md">
               <Sparkles className="h-4 w-4 text-gold-accent" />
               <span className="text-xs font-semibold uppercase tracking-wide-luxe text-stone-200">
-                FitMirrors 4K Inspector
+                FitLabs Result Inspector
               </span>
             </div>
             <div className="flex items-center gap-2">

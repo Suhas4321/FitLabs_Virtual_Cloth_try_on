@@ -137,7 +137,7 @@ export function LightingDrawer({
 
           <div className="mt-auto pt-5">
             <p className="text-center text-[11px] uppercase tracking-wide-luxe text-stone-400/80">
-              Lighting affects background mood only — fit accuracy is preserved.
+              Lighting themes change the interface mood, not the submitted inference inputs.
             </p>
           </div>
         </GlassPanel>

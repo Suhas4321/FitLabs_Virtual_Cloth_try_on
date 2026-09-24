@@ -9,9 +9,9 @@ import { GlassPanel } from '@/components/ui/GlassPrimitives';
  * ============================================================ */
 
 const METRICS = [
-  { icon: Sparkles, value: 'Instant', label: 'AI-Powered Fit Preview' },
-  { icon: Layers, value: '99.4%', label: 'Drape Realism Score' },
-  { icon: Shirt, value: '4K', label: 'Photorealistic Resolution' },
+  { icon: Sparkles, value: 'Async', label: 'Non-Blocking Job Pipeline' },
+  { icon: Layers, value: '10 MB', label: 'Validated Image Uploads' },
+  { icon: Shirt, value: 'REST', label: 'Polled Job Status' },
 ];
 
 function KineticText({
@@ -57,7 +57,7 @@ export function HeroHeader() {
       <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-gold-accent/30 bg-stone-900/80 px-4 py-1.5 backdrop-blur-xl animate-fade-in-up">
         <span className="h-1.5 w-1.5 rounded-full bg-gold-accent animate-glow-pulse" />
         <span className="text-[11px] uppercase tracking-luxe text-stone-300">
-          Photorealistic Virtual Try-On · FitMirrors AI
+          AI-Assisted Virtual Try-On · FitLabs
         </span>
       </div>
 

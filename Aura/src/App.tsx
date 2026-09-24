@@ -28,7 +28,6 @@ import {
   type LightingPreset,
   type SavedFit,
 } from '@/lib/data';
-import { Sparkles, Layers, Cpu, Wand2, Eye } from 'lucide-react';
 
 function App() {
   /* ----------------------------- App state ----------------------------- */
@@ -50,7 +49,6 @@ function App() {
   const [fitting, setFitting] = useState(false);
   const [tryonResultUrl, setTryonResultUrl] = useState<string | null>(null);
   const [resultCache, setResultCache] = useState<Record<string, string>>({});
-  const [isRegeneration, setIsRegeneration] = useState(false);
 
   // Step 4 — showcase
   const [savedFits, setSavedFits] = useState<SavedFit[]>(INITIAL_SAVED_FITS);
@@ -116,7 +114,6 @@ function App() {
   }
 
   function startFitting() {
-    setIsRegeneration(false);
     setActiveStep(3);
     setFitting(true);
   }
@@ -130,7 +127,6 @@ function App() {
       });
     }
     setTryonResultUrl(null);
-    setIsRegeneration(true);
     setActiveStep(3);
     setFitting(true);
   }
@@ -141,7 +137,6 @@ function App() {
     }
     setTryonResultUrl(realUrl);
     setFitting(false);
-    setIsRegeneration(false);
     setActiveStep(4);
   }
 
@@ -153,7 +148,6 @@ function App() {
       garmentName,
       thumbnail: tryonResultUrl ?? modelFrontUrl,
       timestamp: 'Just now',
-      fitScore: 98.7,
     };
     setSavedFits((prev) => [newFit, ...prev]);
     setJustSaved(true);
@@ -232,11 +226,9 @@ function App() {
 
             {activeStep === 3 && (
               <Step3NeuralFitting
-                modelImageUrl={modelFrontUrl}
-                garmentImageUrl={garmentImageUrl ?? undefined}
+                modelImageUrl={modelFrontUrl ?? null}
+                garmentImageUrl={garmentImageUrl ?? null}
                 garmentName={garmentName}
-                cachedResultUrl={cachedResultUrl}
-                isRegeneration={isRegeneration}
                 onComplete={onFittingComplete}
                 onBack={() => setActiveStep(2)}
                 onForceRegenerate={handleForceRegenerate}
@@ -256,7 +248,7 @@ function App() {
               <FitMirrorsLogo size="sm" />
             </div>
             <p className="text-center text-xs text-silver-muted">
-              FitMirrors — Millimeter-precision photorealistic AI try-on for modern wardrobes.
+              FitLabs — virtual try-on backed by a resilient asynchronous inference pipeline.
             </p>
             <p className="text-xs text-silver-muted/60">© 2026 FitMirrors AI</p>
           </GlassPanel>
@@ -301,8 +293,8 @@ const THREE_STEPS = [
   },
   {
     num: '03',
-    title: 'See Your AI Try-On Instantly',
-    text: 'Our generative engine renders a realistic preview of how the garment fits your body.',
+    title: 'Generate Your AI Try-On',
+    text: 'Our generative engine produces a model-dependent preview from your selected images.',
   },
 ];
 
@@ -311,12 +303,12 @@ function HowItWorks() {
     <section id="how" className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
       <Reveal>
         <div className="mb-10 text-center">
-          <SectionLabel>Simple & Instant</SectionLabel>
+          <SectionLabel>Interface Workflow</SectionLabel>
           <h2 className="mt-2 font-serif text-3xl font-bold uppercase tracking-wide-luxe text-stone-100 sm:text-4xl">
             How It <span className="text-gold-accent">Works</span>
           </h2>
           <p className="mx-auto mt-3 max-w-xl text-sm text-stone-400">
-            Three easy steps to experience photorealistic virtual try-on from any device.
+            Three interface steps submit and display a virtual try-on inference job.
           </p>
         </div>
       </Reveal>

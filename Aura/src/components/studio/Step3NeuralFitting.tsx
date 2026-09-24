@@ -83,8 +83,13 @@ export function Step3NeuralFitting({
   const [cachedResultUrl, setCachedResultUrl] = useState<string | null>(null);
   const [isCached, setIsCached] = useState(false);
 
-  const pollingRef = useRef<NodeJS.Timeout | null>(null);
+  const pollingRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const pollStartRef = useRef<number>(0);
+  const onCompleteRef = useRef(onComplete);
+  onCompleteRef.current = onComplete;
+
+  const getErrorMessage = (error: unknown, fallback: string) =>
+    error instanceof Error ? error.message : fallback;
 
   // Scanline animation loop
   useEffect(() => {
@@ -132,7 +137,7 @@ export function Step3NeuralFitting({
             method: 'POST',
             body: formData,
           });
-        } catch (netErr: any) {
+        } catch {
           throw new Error('Failed to connect to backend server. Make sure uvicorn backend is running on http://localhost:8000.');
         }
 
@@ -206,14 +211,14 @@ export function Step3NeuralFitting({
                 ? `${API_BASE}${statusData.result_image_url}`
                 : `${API_BASE}/api/v1/jobs/${jobId}/result`;
 
-              setLogs((prev) => [...prev, '[SUCCESS] Photorealistic drape synthesis complete!']);
+              setLogs((prev) => [...prev, '[SUCCESS] Try-on generation complete!']);
 
               if (cached) {
                 setIsCached(true);
                 setCachedResultUrl(resultUrl);
               } else {
                 setTimeout(() => {
-                  if (!cancelled) onComplete(resultUrl);
+                  if (!cancelled) onCompleteRef.current(resultUrl);
                 }, 800);
               }
             } else if (currentStatus === 'failed') {
@@ -233,12 +238,12 @@ export function Step3NeuralFitting({
                 'The frontend may be out of sync with the API — please check for updates.'
               );
             }
-          } catch (err: any) {
+          } catch (err: unknown) {
             if (pollingRef.current) {
               clearInterval(pollingRef.current);
               pollingRef.current = null;
             }
-            setErrorMsg(err.message || 'Polling error occurred');
+            setErrorMsg(getErrorMessage(err, 'Polling error occurred'));
             setIsProcessing(false);
           }
         };
@@ -247,9 +252,9 @@ export function Step3NeuralFitting({
         if (pollingRef.current) clearInterval(pollingRef.current);
         pollingRef.current = setInterval(pollJob, 2000);
         pollJob(); // Immediate first check
-      } catch (err: any) {
+      } catch (err: unknown) {
         if (!cancelled) {
-          setErrorMsg(err.message || 'Failed to submit try-on job');
+          setErrorMsg(getErrorMessage(err, 'Failed to submit try-on job'));
           setIsProcessing(false);
         }
       }
@@ -414,7 +419,7 @@ export function Step3NeuralFitting({
                   <span className="h-2 w-2 rounded-full bg-amber-400/70" />
                   <span className="h-2 w-2 rounded-full bg-gold-accent/70" />
                   <span className="ml-2 text-[10px] uppercase tracking-wide-luxe text-stone-400">
-                    fitmirrors · real-time inference log
+                    fitmirrors · job status log
                   </span>
                 </div>
                 <div className="space-y-1.5 max-h-[120px] overflow-y-auto no-scrollbar">
